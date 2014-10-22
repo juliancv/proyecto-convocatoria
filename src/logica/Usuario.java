@@ -80,4 +80,65 @@ public class Usuario {
         
     }
     
+    
+    public String getNombreUno () {
+        
+        return nombreUno;
+        
+    }
+    
+    public String getNombreDos () {
+        
+        return nombreDos;
+        
+    }
+    
+    public String getApellidoUno () {
+        
+        return apellidoUno;
+        
+    }
+    
+    public String getApellidoDos () {
+        
+        return apellidoDos;
+        
+    }
+    
+    public String getUsername () {
+        
+        return username;
+        
+    }
+    
+    public String getPassword () {
+        
+        return password;
+        
+    }
+    
+    public String getTipoIdentificacion () {
+        
+        return tipoIdentificacion;
+        
+    }
+    
+    public String getIdentificacion () {
+        
+        return identificacion;
+        
+    }
+    
+    public boolean getEstadoEmpleo () {
+        
+        return empleo;
+        
+    }
+    
+    public boolean getEstado () {
+        
+        return estado;
+        
+    }
+    
 }
