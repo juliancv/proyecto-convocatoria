@@ -15,25 +15,27 @@ import javax.swing.*;
  */
 public class VentanaLogin extends JFrame {
     
-    private JLabel lbtitulo;
-    private JLabel lbusername;
-    private JLabel lbpassword;
+    private final JLabel lbtitulo;
+    private final JLabel lbusername;
+    private final JLabel lbpassword;
+    private final JLabel lbolvidar;
     
-    private JTextField jtfusername;
-    private JTextField jtfpassword;
+    private final JTextField jtfusername;
+    private final JTextField jtfpassword;
     
-    private JButton jbiniciar;
+    private final JButton jbiniciar;
     
-    private JPanel panel;
+    private final JPanel panel;
     
-    private ManejaEventos driverEventos;
+    private final ManejaEventos driverEventos;
     
     
-    public VentanaLogin () {       
+    public VentanaLogin () { 
         
         lbtitulo = new JLabel("Sistema de Convocatoria Docente");
         lbusername = new JLabel("Usuario");
         lbpassword = new JLabel("Contraseña");
+        lbolvidar = new JLabel("¿Olvidó sus datos de acceso?");
         
         jtfpassword = new JTextField();
         jtfusername = new JTextField();
@@ -47,18 +49,32 @@ public class VentanaLogin extends JFrame {
         
         agregarComponentes();
         acomodarComponentes();
+        addFeatures();
         
         setVisible(true);
-        setSize(500, 330);
+        setSize(500, 350);
         setResizable(false);
         setLocationRelativeTo(null);
+        
         setTitle("Sistema Convocatoria Docente");
         
         
     }
     
     
-    public void agregarComponentes () {
+    private void addFeatures () {
+        
+        jbiniciar.setToolTipText("Clic para iniciar sesión");
+        jtfpassword.setToolTipText("Ingrese su contraseña de acceso");
+        jtfusername.setToolTipText("Ingrese usuario de acceso");
+        
+        lbolvidar.setFont(new Font("Arial", 0, 10));
+        lbolvidar.setToolTipText("Clic si olvidó sus datos de acceso");
+        
+    }
+    
+    
+    private void agregarComponentes () {
         
         panel.add(lbtitulo);
         panel.add(lbusername);
@@ -66,26 +82,29 @@ public class VentanaLogin extends JFrame {
         panel.add(jtfusername);
         panel.add(jtfpassword);
         panel.add(jbiniciar);
+        panel.add(lbolvidar);
         panel.setLayout(null);
         
     }
     
     
-    public void acomodarComponentes () {
+    private void acomodarComponentes () {
         
         lbtitulo.setBounds(100, 20, 300, 30);
         lbusername.setBounds(80, 100, 120, 30);
         jtfusername.setBounds(220, 100, 200, 30);
         lbpassword.setBounds(80, 150, 120, 30);
         jtfpassword.setBounds(220, 150, 200, 30);
+        lbolvidar.setBounds(220, 190, 140, 10);
         
-        jbiniciar.setBounds(300, 220, 120, 30);
+        jbiniciar.setBounds(300, 240, 120, 30);
         
     }
     
     public void addEvents () {
         
         jbiniciar.addMouseListener(driverEventos);
+        lbolvidar.addMouseListener(driverEventos);
         
     }
     
@@ -94,7 +113,7 @@ public class VentanaLogin extends JFrame {
         
         boolean flag = false;
         
-        if (!jtfpassword.getText().equals("") && !jtfusername.getText().equalsIgnoreCase("")) {
+        if (!jtfpassword.getText().equals("") && !jtfusername.getText().equals("")) {
             
             flag = true;
             
@@ -111,33 +130,58 @@ public class VentanaLogin extends JFrame {
         @Override
         public void mouseClicked (MouseEvent me) {
             
-            if (validarCampos() == true) {
+            if (me.getSource() == jbiniciar) {
+            
+                if (validarCampos() == true) {
                 
-                System.out.println("click\n");
+                    System.out.println("iniciar\n");
+                
+                }
+                
+            }
+            
+            else if (me.getSource() == lbolvidar) {
+                
+                System.out.println("olvidar\n");
+                
             }
             
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
+        public void mousePressed(MouseEvent me) {
             
         }
 
         @Override
-        public void mouseReleased(MouseEvent e) {
+        public void mouseReleased(MouseEvent me) {
             
         }
 
         @Override
-        public void mouseEntered(MouseEvent e) {
+        public void mouseEntered(MouseEvent me) {
+            
+            if (me.getSource() == lbolvidar) {
+                
+                lbolvidar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                lbolvidar.setSize(200, 10);
+                lbolvidar.setFont(new Font("Arial", 1, 10));
+                
+            }
             
         }
 
         @Override
-        public void mouseExited(MouseEvent e) {
+        public void mouseExited(MouseEvent me) {
             
-        }
-        
+            if (me.getSource() == lbolvidar) {
+                
+                lbolvidar.setFont(new Font("Arial", 0, 10));
+                lbolvidar.setSize(140, 10);
+                
+            }
+            
+        }        
         
     }
     
